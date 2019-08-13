@@ -46,9 +46,11 @@ def parse():
 
 	return args
 
+
 def make_dir(path):
 	if not os.path.exists(os.path.dirname(path)):
-		os.makedirs(os.path.dirname(out_path))
+		os.makedirs(os.path.dirname(path))
+
 
 def main():
 	global args
