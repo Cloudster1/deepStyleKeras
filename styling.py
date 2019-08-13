@@ -12,8 +12,8 @@ def parse():
 
 	parser.add_argument('--mode', type=str, default='img', choices=['img', 'vid'],
 	                    help='Specify if u want to transform an image or a video, (default: %(default)s)')
-	parser.add_argument('--base_image', type=str, help='Path to the image to transform.')
-	parser.add_argument('--base_video', type=str, help='Path to the video to transform.')
+
+	parser.add_argument('--input', type=str, help='Path to the image to transform.', required=True)
 	parser.add_argument('--style_image', type=str, help='Path to the style reference image.', required=True)
 
 	parser.add_argument('--output_name', type=str, help='Specify the name and the path for the output image or video',
@@ -62,7 +62,7 @@ def main():
 		make_dir(out_path)
 
 
-		s = style(base_img=args.base_image, style=args.style_image, size=args.output_size, fun_evals=args.fun_evals,
+		s = style(base_img=args.input, style=args.style_image, size=args.output_size, fun_evals=args.fun_evals,
 		          pooling=args.pooling, weights=args.weights, tv_weight=args.tv_weight, style_weight=args.style_weight,
 		          content_weight=args.content_weight)
 
@@ -73,7 +73,7 @@ def main():
 		save_img(out_path, oimg)
 
 	elif args.mode == 'vid':
-		v_reader = VideoReader(file=args.base_video)
+		v_reader = VideoReader(file=args.input)
 
 		# create the output directories
 		out_path = args.output_name + os.path.splitext(args.base_video)[1]
