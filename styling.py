@@ -67,7 +67,7 @@ def main():
 		          content_weight=args.content_weight)
 
 		# get the generated image
-		oimg = s(args.base_image)
+		oimg = s(args.input)
 
 		# save the image
 		save_img(out_path, oimg)
